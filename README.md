@@ -1,0 +1,1 @@
+This repository contains the code used to investigate the impact of line-breaking passes in soccer, using synced event and tracking data from StatsPerform. For more information consult this accompanying [blogpost](https://kubamichalczyk.github.io/2020/07/04/Investigating-line-breaking-passes.html).
