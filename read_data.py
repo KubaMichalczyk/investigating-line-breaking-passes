@@ -172,7 +172,6 @@ def read_playerinfo_sportvu(file):
                                          'birth_date', 'inpitch', 'outpitch', 'player_id_event', 'player_id_tracking',
                                          'match_id_event', 'match_id_tracking'])
     player_df[['player_id_event', 'player_id_tracking']] = player_df[['player_id_event', 'player_id_tracking']].astype(str)
-    # player_df.iloc[:, -1] = player_df.iloc[:, -1].str.rstrip(';')
     return player_df
 
 

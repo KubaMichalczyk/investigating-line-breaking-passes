@@ -158,12 +158,6 @@ def add_tracking_features(_pass, lines, direction_of_play):
             line_compactness += 1 / dist(segment[0], segment[1])
             a = max(a, aov(_pass[0], segment))
             d = max(d, dist(segment[0], segment[1]))
-            # if intersect(_pass[0], _pass[1], segment[0], segment[1]):
-            #     a = aov(_pass, segment)
-            #     d = dist(segment[0], segment[1])
-            # else:
-            #     a = np.nan
-            #     d = np.nan
     else:
         a = np.nan
         d = np.nan
@@ -292,6 +286,3 @@ if __name__ == '__main__':
     with open('all_passes_with_line_breaking_info_jenks.pkl', 'wb') as file:
         pickle.dump(all_passes, file)
 
-    # game_id = all_passes[0].iloc[0]['id_match']
-    # tracking_data = pd.read_parquet(glob.glob('./processed-tracking-data/*' + game_id + '.parquet')[0])
-    # game_passes = add_breaking_line_info(all_passes[0].iloc[:3], tracking_data)
