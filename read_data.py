@@ -224,6 +224,36 @@ def filter_actions(event_df):
 
 def add_helpers(event_df):
 
+    event_info = pd.DataFrame.from_dict(
+        {'event_name': {0: 'Block', 1: 'Catch', 2: 'Catch drop', 3: 'Catch drop save', 4: 'Catch save', 5: 'Chance',
+                        6: 'Clearance', 7: 'Clearance uncontrolled', 8: 'Cross', 9: 'Cross assist', 10: 'Crossbar',
+                        11: 'Diving', 12: 'Diving save', 13: 'Drop of ball', 14: 'End of Half',
+                        15: 'Foul - Direct free-kick',
+                        16: 'Foul - Indirect free-kick', 17: 'Foul - Penalty', 18: 'Foul - Throw-in', 19: 'Goal',
+                        20: 'HalfTime Start', 21: 'Hold of ball', 22: 'Interruption', 23: 'Left goal post',
+                        24: 'Neutral clearance', 25: 'Neutral clearance save', 26: 'Off side', 27: 'Other obstacle',
+                        28: 'Out for corner', 29: 'Out for goal kick', 30: 'Out for throw-in', 31: 'Own Goal',
+                        32: 'Pass', 33: 'Pass assist', 34: 'Punch', 35: 'Punch save', 36: 'Reception', 37: 'Red card',
+                        38: 'Right goal post', 39: 'Running with ball', 40: 'Shot not on target', 41: 'Shot on target',
+                        42: 'Substitution', 43: 'Yellow card'},
+         'is_action': {0: 'Action', 1: 'Action', 2: 'Action', 3: 'Action', 4: 'Action', 5: 'Technical', 6: 'Action',
+                       7: 'Action', 8: 'Action', 9: 'Action', 10: 'Technical', 11: 'Action', 12: 'Action', 13: 'Action',
+                       14: 'Technical', 15: 'Action', 16: 'Action', 17: 'Action', 18: 'Action', 19: 'Technical',
+                       20: 'Technical', 21: 'Action', 22: 'Technical', 23: 'Technical', 24: 'Action', 25: 'Action',
+                       26: 'Technical', 27: 'Technical', 28: 'Technical', 29: 'Technical', 30: 'Technical',
+                       31: 'Technical', 32: 'Action', 33: 'Action', 34: 'Action', 35: 'Action', 36: 'Action',
+                       37: 'Technical', 38: 'Technical', 39: 'Action', 40: 'Action', 41: 'Action', 42: 'Technical',
+                       43: 'Technical'},
+         'action_type': {0: 'Defensive', 1: 'Defensive', 2: 'Defensive', 3: 'Defensive', 4: 'Defensive', 5: pd.NA,
+                         6: 'Defensive', 7: 'Defensive', 8: 'Offensive', 9: 'Offensive', 10: pd.NA, 11: 'Defensive',
+                         12: 'Defensive', 13: 'Offensive', 14: pd.NA, 15: 'Defensive', 16: 'Defensive', 17: 'Defensive',
+                         18: 'Offensive', 19: pd.NA, 20: pd.NA, 21: 'Offensive', 22: pd.NA, 23: pd.NA, 24: 'Defensive',
+                         25: 'Defensive', 26: pd.NA, 27: pd.NA, 28: pd.NA, 29: pd.NA, 30: pd.NA, 31: pd.NA,
+                         32: 'Offensive',
+                         33: 'Offensive', 34: 'Defensive', 35: 'Defensive', 36: 'Offensive', 37: pd.NA, 38: pd.NA,
+                         39: 'Offensive', 40: 'Offensive', 41: 'Offensive', 42: pd.NA, 43: pd.NA}}
+    )
+
     event_df = event_df.merge(event_info[['event_name', 'action_type', 'is_action']], on='event_name', how='left')
 
     event_df_shifted = event_df.groupby(['id_match', 'id_half']).shift(-1)
@@ -560,8 +590,6 @@ def extract_pitch_dimensions(file):
 
     return field_length, field_width
 
-
-event_info = pd.read_csv('event_types.csv')
 
 if __name__ == '__main__':
     games = []
